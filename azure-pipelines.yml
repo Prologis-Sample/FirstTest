@@ -9,19 +9,20 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-- job: Build
-    displayName: Build steps
-    steps:
-    - task: CopyFiles@2
-      displayName: 'Copy Files to artifact staging directory'
-      inputs:
-        SourceFolder: '$(System.DefaultWorkingDirectory)'
-        Contents: '*.zip'
-        TargetFolder: $(Build.ArtifactStagingDirectory)
-    - upload: $(Build.ArtifactStagingDirectory)
-      artifact: drop
+jobs:
+   - job: Build
+     displayName: Build steps
+     steps:
+     - task: CopyFiles@2
+       displayName: 'Copy Files to artifact staging directory'
+       inputs:
+         SourceFolder: '$(System.DefaultWorkingDirectory)'
+         Contents: '*.zip'
+         TargetFolder: $(Build.ArtifactStagingDirectory)
+      - upload: $(Build.ArtifactStagingDirectory)
+        artifact: drop
        
-- job: sshtoVM
+  - job: sshtoVM
     displayName : ssh to vm
     steps: 
     - task: CopyFilesOverSSH@0
