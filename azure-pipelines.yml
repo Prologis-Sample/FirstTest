@@ -13,9 +13,8 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
--  steps:
-  - checkout: self
-    persistCredentials: true
+- checkout: self
+  persistCredentials: true
        
 
 - task: CopyFilesOverSSH@0
