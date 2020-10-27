@@ -13,9 +13,7 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
-stages:
-- stage: Checkout
-  steps:
+-  steps:
   - checkout: self
     persistCredentials: true
        
