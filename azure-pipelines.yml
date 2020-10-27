@@ -15,8 +15,8 @@ steps:
 
 stages:
 - stage: Checkout
+  steps:
   - checkout: self
-    submodules: true
     persistCredentials: true
        
 
