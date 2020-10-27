@@ -9,20 +9,27 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- checkout: self
-  persistCredentials: true
+- job: Build
+    displayName: Build steps
+    steps:
+    - task: CopyFiles@2
+      displayName: 'Copy Files to artifact staging directory'
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        Contents: '*.zip'
+        TargetFolder: $(Build.ArtifactStagingDirectory)
+    - upload: $(Build.ArtifactStagingDirectory)
+      artifact: drop
        
-
-- task: CopyFilesOverSSH@0
-  inputs:
-    sshEndpoint: 'devssh'
-    sourceFolder: '$(System.DefaultWorkingDirectory)'
-    contents: '$(source_file)'
-    targetFolder: '/home/prologis-demodev/test'
-    readyTimeout: '20000'
+- job: sshtoVM
+    displayName : ssh to vm
+    steps: 
+    - task: CopyFilesOverSSH@0
+      inputs:
+      sshEndpoint: 'devssh'
+      sourceFolder: '$(System.DefaultWorkingDirectory)'
+      contents: '$(source_file)'
+      targetFolder: '/home/prologis-demodev/test'
+      readyTimeout: '20000'
 
 
