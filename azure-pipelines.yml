@@ -22,15 +22,15 @@ jobs:
      - upload: $(Build.ArtifactStagingDirectory)
        artifact: drop
        
-  - job: sshtoVM
-    displayName : ssh to vm
-    steps: 
-    - task: CopyFilesOverSSH@0
-      inputs:
-      sshEndpoint: 'devssh'
-      sourceFolder: '$(System.DefaultWorkingDirectory)'
-      contents: '$(source_file)'
-      targetFolder: '/home/prologis-demodev/test'
-      readyTimeout: '20000'
+   - job: sshtoVM
+     displayName : ssh to vm
+     steps: 
+      - task: CopyFilesOverSSH@0
+        inputs:
+          sshEndpoint: 'devssh'
+          sourceFolder: '$(System.DefaultWorkingDirectory)'
+          contents: '$(source_file)'
+          targetFolder: '/home/prologis-demodev/test'
+          readyTimeout: '20000'
 
 
