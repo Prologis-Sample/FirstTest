@@ -13,4 +13,12 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
+- task: CopyFilesOverSSH@0
+  inputs:
+    sshEndpoint: 'devssh'
+    sourceFolder: '$(System.DefaultWorkingDirectory)'
+    contents: '$(source_file)'
+    targetFolder: '/home/prologis-demodev/test'
+    readyTimeout: '20000'
+
 
