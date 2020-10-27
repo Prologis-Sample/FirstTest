@@ -19,8 +19,8 @@ jobs:
          SourceFolder: '$(System.DefaultWorkingDirectory)'
          Contents: '*.zip'
          TargetFolder: $(Build.ArtifactStagingDirectory)
-      - upload: $(Build.ArtifactStagingDirectory)
-        artifact: drop
+     - upload: $(Build.ArtifactStagingDirectory)
+       artifact: drop
        
   - job: sshtoVM
     displayName : ssh to vm
