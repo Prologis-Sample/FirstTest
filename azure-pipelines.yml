@@ -40,6 +40,9 @@ jobs:
             sed 's/"Version = "$CURRENT_VER/"Version = "$newversion/g' $(trigger_file) > $(newtrigger_file)
             mv $(newtrigger_file) $(trigger_file)
             cat $(trigger_file)
+            git add $(trigger_file)
+	        	git commit -m "version $newversion"
+		        git push
             echo "Execute Completed"
 
 
