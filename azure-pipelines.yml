@@ -28,7 +28,6 @@ stages:
   jobs:
     - job: read-trigger
       displayName: read the file
-      dependsOn:code-checkout
       steps:
          - task: Bash@3
            inputs:
