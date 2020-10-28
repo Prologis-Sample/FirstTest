@@ -38,6 +38,7 @@ stages:
   jobs:
     - job: checkdevinfo
       displayName: check informativa dev connection
+      pool: server
       steps:
         - task: InvokeRESTAPI@1
           inputs:
