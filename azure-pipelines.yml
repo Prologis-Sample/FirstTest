@@ -32,7 +32,7 @@ stages:
          - task: Bash@3
            inputs:
              filePath: '$(System.DefaultWorkingDirectory).'
-             filename: $(trigger_script)
+             filename: '$(trigger_script)'
       
      
          
