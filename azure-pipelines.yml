@@ -24,26 +24,25 @@ jobs:
    - job: Get the build version 
      displayName: Get the build version from trigger file
      steps:
-     - task: CmdLine@2
-       inputs:
-       script: |
-             CURRENT_VER=`cat Trigger_File.txt | grep "Version" |  | cut -d  ":" -f2`
-             echo $CURRENT_VER >/home/vsts/work/1/a/Ver_file
-             major=`echo $CURRENT_VER | cut -d "." -f1`
-      		   minor=`echo $CURRENT_VER | cut -d "." -f2`
-      		   patch=`echo $CURRENT_VER | cut -d "." -f3`
-             newpatch=$(expr "$patch" + 1)
-      		   newversion=`echo $major.$minor.$newpatch`
-      		   echo $newversion
-             pwd
-      		   sed \'s/"Version" : "\'$CURRENT_VER\'"/"Version" : "\'$newversion\'"/\' Trigger_File.txt > NewTrigger_File.txt
-      		   mv NewTrigger_File.txt Trigger_File.txt
-      		   echo "Execute Completed"
-      		   git add Trigger_File.txt
-      		   git commit -m "version $newversion"
-      		   git push 
-        
-        SourceFolder: '$(System.DefaultWorkingDirectory)'
+      - task: CmdLine@2
+        inputs:
+          script: |
+            CURRENT_VER=`cat Trigger_File.txt | grep "Version" |  | cut -d  ":" -f2`
+                         echo $CURRENT_VER >/home/vsts/work/1/a/Ver_file
+                         major=`echo $CURRENT_VER | cut -d "." -f1`
+                  		   minor=`echo $CURRENT_VER | cut -d "." -f2`
+                  		   patch=`echo $CURRENT_VER | cut -d "." -f3`
+                         newpatch=$(expr "$patch" + 1)
+                  		   newversion=`echo $major.$minor.$newpatch`
+                  		   echo $newversion
+                         pwd
+                  		   sed \'s/"Version" : "\'$CURRENT_VER\'"/"Version" : "\'$newversion\'"/\' Trigger_File.txt > NewTrigger_File.txt
+                  		   mv NewTrigger_File.txt Trigger_File.txt
+                  		   echo "Execute Completed"
+                  		   git add Trigger_File.txt
+                  		   git commit -m "version $newversion"
+                  		   git push
+     
 
 
        
