@@ -10,7 +10,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 stages:
-- stage: Code-checkout
+- stage: Codecheckout
   displayName: Checkour the repo 
   jobs:
     - job: checkout-code
@@ -23,7 +23,7 @@ stages:
               # Write your commands here
               
               echo 'stage  code checkout'
-- stage: Source-version 
+- stage: SourceVersion 
   displayName: read the trigger to get version
   jobs:
     - job: read-trigger
