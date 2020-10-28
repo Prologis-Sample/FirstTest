@@ -21,12 +21,12 @@ jobs:
          TargetFolder: $(Build.ArtifactStagingDirectory)
      - upload: $(Build.ArtifactStagingDirectory)
        artifact: drop
-    - job: Get the build version 
-      displayName: Get the build version from trigger file
-      steps:
-        - task: CmdLine@2
-          inputs:
-             script: |
+   - job: Get the build version 
+     displayName: Get the build version from trigger file
+     steps:
+     - task: CmdLine@2
+       inputs:
+       script: |
              CURRENT_VER=`cat Trigger_File.txt | grep "Version" |  | cut -d  ":" -f2`
              echo $CURRENT_VER >/home/vsts/work/1/a/Ver_file
              major=`echo $CURRENT_VER | cut -d "." -f1`
