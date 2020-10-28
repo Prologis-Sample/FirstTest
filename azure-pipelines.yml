@@ -27,7 +27,7 @@ jobs:
       - task: CmdLine@2
         inputs:
           script: |
-            CURRENT_VER=`cat Trigger_File.txt | grep "Version" |  | cut -d  ":" -f2`
+            CURRENT_VER=`cat Trigger_File.txt | grep "Version" | cut -d  ":" -f2`
                          echo $CURRENT_VER >/home/vsts/work/1/a/Ver_file
                          major=`echo $CURRENT_VER | cut -d "." -f1`
                   		   minor=`echo $CURRENT_VER | cut -d "." -f2`
