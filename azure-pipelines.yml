@@ -9,9 +9,14 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-jobs: 
-   - job: Build
-     displayName: Build steps
+stages:
+- stage: Create-Version
+  displayName: Create source zip version
+  dependsOn: string | [ string ]
+  condition: string
+  variables: # several syntaxes, see specific section
+  - job : VersionandBuild
+    displayName: Build steps
      steps:
      - task: CopyFiles@2
        displayName: 'Copy Files to artifact staging directory'
@@ -21,9 +26,6 @@ jobs:
          TargetFolder: $(Build.ArtifactStagingDirectory)
      - upload: $(Build.ArtifactStagingDirectory)
        artifact: drop
-   - job: buildVer
-     displayName: Get the build version from trigger file
-     steps:
       - task: CmdLine@2
         inputs: 
           SourceFolder: '$(System.DefaultWorkingDirectory)'
