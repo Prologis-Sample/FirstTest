@@ -10,44 +10,32 @@ pool:
   vmImage: 'ubuntu-latest'
 
 stages:
-- stage: Create-Version
-  displayName: Create source zip version
-  dependsOn: string | [ string ]
-  condition: string
-  variables: # several syntaxes, see specific section
-  - job : VersionandBuild
-    displayName: Build steps
-     steps:
-     - task: CopyFiles@2
-       displayName: 'Copy Files to artifact staging directory'
-       inputs:
-         SourceFolder: '$(System.DefaultWorkingDirectory)'
-         Contents: '*.zip'
-         TargetFolder: $(Build.ArtifactStagingDirectory)
-     - upload: $(Build.ArtifactStagingDirectory)
-       artifact: drop
-      - task: CmdLine@2
-        inputs: 
-          SourceFolder: '$(System.DefaultWorkingDirectory)'
-          script: |
-            CURRENT_VER=`cat $(trigger_file)| grep "Version" | cut -d  "=" -f2`
-            echo $CURRENT_VER >/home/vsts/work/1/a/ver_file
-            major=`echo $CURRENT_VER | cut -d "." -f1`
-            minor=`echo $CURRENT_VER | cut -d "." -f2`
-            patch=`echo $CURRENT_VER | cut -d "." -f3`
-            newpatch=$(expr "$patch" + 1)
-            newversion=`echo $major.$minor.$newpatch`
-            echo $newversion
-            pwd
-            sed 's/"Version = "$CURRENT_VER/"Version = "$newversion/g' $(trigger_file) > $(newtrigger_file)
-            mv $(newtrigger_file) $(trigger_file)
-            cat $(trigger_file)
-            git add $(trigger_file)
-            git commit -m "version $newversion"
-            git push
-            echo "Execute Completed"
-
-
+- stage: Code-checkout
+  displayName: Checkour the repo 
+  jobs:
+    - job: checkout-code
+      displayName: checkout the source-repo
+      steps:
+        - task: Bash@3
+          inputs:
+            targetType: 'inline'
+            script: |
+              # Write your commands here
+              
+              echo 'stage  code checkout'
+- stage: Source-version 
+  displayName: read the trigger to get version
+  jobs:
+    - job: read-trigger
+      displayName: read the file
+      dependsOn:code-checkout
+      steps:
+         - task: Bash@3
+           inputs:
+             filePath: '$(System.DefaultWorkingDirectory).'
+             filename: readTriggerFile.sh
+      
+     
          
 
 
