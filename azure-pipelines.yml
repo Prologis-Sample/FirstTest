@@ -33,6 +33,19 @@ stages:
            inputs:
              filePath: '$(System.DefaultWorkingDirectory).'
              filename: '$(trigger_script)'
+- stage: checkinformatica
+  displayName: check the informatica connection
+  jobs:
+    - job: checkdevinfo
+      displayName: check informativa dev connection
+      steps:
+        - task: InvokeRESTAPI@1
+          inputs:
+          connectionType: 'connectedServiceName'
+          serviceConnection: 'iicsdev'
+          method: 'POST'
+          waitForCompletion: 'false'
+-
       
      
          
