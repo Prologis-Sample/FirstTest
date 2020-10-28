@@ -41,10 +41,12 @@ stages:
       steps:
         - task: InvokeRESTAPI@1
           inputs:
-            connectionType: 'connectedServiceName'
-            serviceConnection: 'iicsqa'
-            method: 'POST'
-            waitForCompletion: 'false'
+               connectionType: 'connectedServiceName'
+               serviceConnection: 'iicsqa'
+               method: 'POST'
+               waitForCompletion: 'false'
+
+
 
       
      
