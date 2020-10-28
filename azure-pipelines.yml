@@ -29,9 +29,18 @@ jobs:
           SourceFolder: '$(System.DefaultWorkingDirectory)'
           script: |
             CURRENT_VER=`cat $(trigger_file)| grep "Version" | cut -d  "=" -f2`
-            echo $CURRENT_VER >/home/vsts/work/1/a/Ver_file
-            echo $CURRENT_VER
-          
+            echo $CURRENT_VER >/home/vsts/work/1/a/
+            major=`echo $CURRENT_VER | cut -d "." -f1`
+            minor=`echo $CURRENT_VER | cut -d "." -f2`
+            patch=`echo $CURRENT_VER | cut -d "." -f3`
+            newpatch=$(expr "$patch" + 1)
+            newversion=`echo $major.$minor.$newpatch`
+            echo $newversion
+            pwd
+            sed \'s/"Version" : "\'$CURRENT_VER\'"/"Version" = "\'$newversion\'"/\' $(trigger_file) > NewTrigger_File.txt
+            mv NewTrigger_File.txt $(trigger_file)
+            echo "Execute Completed"
+
 
          
 
