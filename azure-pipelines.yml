@@ -37,7 +37,7 @@ jobs:
             newversion=`echo $major.$minor.$newpatch`
             echo $newversion
             pwd
-            sed 's/"Version = "$CURRENT_VER/"Version = "$newversion' $(trigger_file) > NewTrigger_File.txt
+            sed 's/"Version = "$CURRENT_VER/"Version = "$newversion/g' $(trigger_file) > NewTrigger_File.txt
             mv NewTrigger_File.txt $(trigger_file)
             echo "Execute Completed"
 
