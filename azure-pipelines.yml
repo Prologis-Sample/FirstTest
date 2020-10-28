@@ -13,7 +13,7 @@ stages:
 - stage: Codecheckout
   displayName: Checkour the repo 
   jobs:
-    - job: checkout-code
+    - job: checkoutcode
       displayName: checkout the source-repo
       steps:
         - task: Bash@3
@@ -26,7 +26,7 @@ stages:
 - stage: SourceVersion 
   displayName: read the trigger to get version
   jobs:
-    - job: read-trigger
+    - job: readtrigger
       displayName: read the file
       steps:
          - task: Bash@3
