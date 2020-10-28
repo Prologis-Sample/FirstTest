@@ -21,7 +21,7 @@ jobs:
          TargetFolder: $(Build.ArtifactStagingDirectory)
      - upload: $(Build.ArtifactStagingDirectory)
        artifact: drop
-   - job: Get the build version 
+   - job: buildVer
      displayName: Get the build version from trigger file
      steps:
       - task: CmdLine@2
