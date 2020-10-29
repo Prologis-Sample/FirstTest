@@ -31,7 +31,7 @@ stages:
       steps:
          - task: Bash@3
            inputs:
-             filePath: '$(Build.SourcesDirectory).'
+             filePath: '$(Build.SourcesDirectory)/.git/'
              filename: '$(trigger_script)'
 - stage: checkinformatica
   displayName: check the informatica connection
