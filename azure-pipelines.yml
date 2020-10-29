@@ -23,7 +23,7 @@ stages:
               # Write your commands here
               
               echo 'stage  code checkout'
-              echo pwd
+              echo `pwd
 - stage: SourceVersion 
   displayName: read the trigger to get version
   jobs:
