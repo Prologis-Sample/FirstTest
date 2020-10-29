@@ -33,8 +33,13 @@ stages:
       steps:
          - task: Bash@3
            inputs:
-             filePath: '$(Build.SourcesDirectory)/.git'
-             filename: '$(trigger_script)'
+             targetType: 'inline'
+             script: |
+              while IFS= read -r line
+              do
+                 echo $line
+              done < $(trigger_file)
+
 - stage: checkinformatica
   displayName: check the informatica connection
   jobs:
