@@ -45,7 +45,7 @@ stages:
                  newpatch=$(expr "$patch" + 1)
                  newversion=`echo $major.$minor.$newpatch`
                  echo $newversion $version
-                 line1=`echo $line |sed "s/$(version)/$(newversion)/g"`
+                 line1=`echo $line |sed "s/${version}/${newversion}/g"`
                  echo $line1
               done < $(trigger_file)
 
