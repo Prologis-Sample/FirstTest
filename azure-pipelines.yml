@@ -37,7 +37,7 @@ stages:
              script: |
               while IFS= read -r line
               do
-                 version = `echo $line |  grep "Version" | cut -d ":" f2`
+                 version = `echo $line |  grep "Version" | cut -d ":" -f2`
                  echo $version
               done < $(trigger_file)
 
