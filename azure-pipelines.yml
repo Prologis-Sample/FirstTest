@@ -23,7 +23,8 @@ stages:
               # Write your commands here
               
               echo 'stage  code checkout'
-              echo `pwd
+              cat $(trigger_file)
+              
 - stage: SourceVersion 
   displayName: read the trigger to get version
   jobs:
